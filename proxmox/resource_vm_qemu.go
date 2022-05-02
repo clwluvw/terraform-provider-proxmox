@@ -1327,7 +1327,9 @@ func _resourceVmQemuRead(d *schema.ResourceData, meta interface{}) error {
 	// by calling a SetId("")
 	_, err = client.GetVmInfo(vmr)
 	logger.Info().Msg("getting vm info")
-	logger.Info().Msg(err.Error())
+	if err != nil {
+		logger.Info().Msg(err.Error())
+	}
 	if err != nil {
 		logger.Err(err).Int("vmid", vmID).Msg("failed to get vm info")
 		d.SetId("")
